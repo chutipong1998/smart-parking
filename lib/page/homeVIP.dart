@@ -10,21 +10,67 @@ class HomeVIP extends StatefulWidget {
 
 class _HomeVipState extends State<HomeVIP> {
   // List<String> list = ['xxx', 'yyy', 'zzz'];
+  List<String> _locations = ['เซ็นทรัลพลาซา อุบลราชธานี', 'โรงแรมสุนีย์แกรนด์', 'บิ๊กซี ซูเปอร์เซ็นเตอร์ อุบลราชธานี'];
+  String _selectedLocation;
+  
   @override
   Widget build(BuildContext context) {
     // String args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      body: ListView(
+      body: Stack(
         children: <Widget>[
-          headerSection,
-          titleSection,
-          buttonSection,
-          // courseSection,
+          // ส่วนการทำภาพพื้นหลัง
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/BG.jpg'),
+                fit: BoxFit.cover
+              ),
+            ),
+          ),
+          ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              // ส่วนของการทำดรอปดาวน์
+              Container(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: DropdownButton(
+                      hint: Text('Please choose a location'),
+                      value: _selectedLocation,
+                      onChanged: (newValue){
+                        setState(() {
+                          _selectedLocation = newValue;
+                        });
+                      },
+                      items: _locations.map((location){
+                        return DropdownMenuItem(
+                          child: Text(location),
+                          value: location,
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          ListView(
+            // ส่วนของการทำ container ของ data
+            children: <Widget>[
+              // headerSection,
+              countCarSection,
+              parkingSpaceSection,
+            ],
+          )
         ],
-        // children: list.map((element){
-        //   return Text(element);
-        // }).toList(),
       ),
+      //   // children: list.map((element){
+      //   //   return Text(element);
+      //   // }).toList(),
+      // ),
     );
   }
 }
@@ -35,7 +81,7 @@ Widget headerSection = Image.asset(
   width: 250,
 );
 
-Widget titleSection = Column(
+Widget countCarSection = Column(
   children: <Widget>[
     Padding(
       padding: const EdgeInsets.fromLTRB(40, 50, 40, 0),
@@ -66,7 +112,7 @@ Widget titleSection = Column(
   ],
 );
 
-Widget buttonSection = Column(
+Widget parkingSpaceSection = Column(
   children: <Widget>[
     Padding(
       padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),

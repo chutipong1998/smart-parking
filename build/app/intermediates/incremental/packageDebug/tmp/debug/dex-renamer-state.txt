@@ -1,0 +1,4 @@
+#Mon Sep 23 22:35:26 ICT 2019
+base.0=/home/chutipong/AndroidStudioProjectsflutter_app/smartparking/build/app/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
